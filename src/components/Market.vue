@@ -1,16 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h2>222Essential Links</h2>
     <ul>
-      <li>クリプトハンターズ 狩りしようぜ
       <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
       </li>
     </ul>
   </div>
@@ -18,10 +11,10 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Market',
   data () {
     return {
-      msg: 'クリプトハンターズ 狩りしようぜ'
+      msg: 'monster Market'
     }
   }
 }
