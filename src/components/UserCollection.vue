@@ -18,6 +18,7 @@
   import artifacts from '../../build/contracts/CreateHunter.json'
 
   const HunterToken = contract(artifacts)
+  // const name = "dd"
   export default {
     name: 'UserCollection',
     data () {
@@ -56,17 +57,18 @@
     },
     methods: {
       createHunter(name) {
-        return HunterToken.methods.createRandomHunter(name)
-        .send({ from: this.account })
-        .on("receipt", function(receipt) {
-          $("#txStatus").text("Successfully created " + name + "!");
+        console.log("うううううううううううう")
+        console.log("rr")
+        this.name = "abc"
+        console.log(this.name)
+        return HunterToken.deployed().then((instance) => instance.createRandomHunter(this.name, { from: this.account }).then((r) => {
+          console.log("rr")
+          console.log("成功")
+          $("#txStatus").text("Successfully created " + this.name + "!");
           // Transaction was accepted into the blockchain, let's redraw the UI
           getHunterByOwner(this.account).then(displayHunter);
         })
-        .on("error", function(error) {
-          // Do something to alert the user their transaction has failed
-          $("#txStatus").text(error);
-        });
+        );
       },
       displayHunter(id) {
         getHunterDetails(id).then(function(hunter) {
