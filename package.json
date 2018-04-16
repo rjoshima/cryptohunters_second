@@ -14,9 +14,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "truffle-contract": "^3.0.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "web3": "^1.0.0-beta.34",
+    "web3": "0.20.2",
     "zeppelin-solidity": "^1.8.0"
   },
   "devDependencies": {
@@ -60,7 +61,7 @@
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
     "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.8",
+    "postcss-loader": "^2.1.4",
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
     "selenium-server": "^3.0.1",

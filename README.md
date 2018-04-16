@@ -28,4 +28,12 @@ npm run e2e
 npm test
 ```
 
+# use geth
+geth --rpc --rpcapi 'web3,eth,debug' --rpcport 8545 --rpccorsdomain '*'.
+
+# use IDE to deploy test net or debug your contract, not using truffle
+https://remix.ethereum.org/
+
+
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

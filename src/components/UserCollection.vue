@@ -1,22 +1,79 @@
 <template>
-  <div class="hell">
-    <h2>UserCollection</h2>
+  <div class="UserStatus">
+    <ul>
+      <li>Name: {{ hunter.name }}</li>
+      <li>DNA: {{ hunter.level }}</li>
+      <li>Level: {{ dtweet.title }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'UserCollection',
-  data () {
-    return {
-      msg: 'UserCollection'
+  import Web3 from 'web3'
+  import contract from 'truffle-contract'
+  import artifacts from '../contracts/CreateHunter.json'
+
+  const HunterToken = contract(artifacts)
+  export default {
+    name: 'UserCollection',
+    data () {
+      return {
+        msg: 'UserCollection'
+      }
+    },
+    created() {
+      if (typeof web3 !== 'undefined') {
+        console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 Fluyd, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
+        // Use Mist/MetaMask's provider
+        web3 = new Web3(web3.currentProvider)
+      } else {
+        console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask")
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+        web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"))
+      }
+      HunterToken.setProvider(web3.currentProvider)
+      web3.eth.getAccounts((err, accs) => {
+        if (web3.currentProvider.publicConfigStore._state.networkVersion !== '3') {
+          this.is_network = false
+        } else {
+          this.is_network = true
+        }
+        if (err != null) {
+          console.log(err)
+          this.message = "There was an error fetching your accounts. Do you have Metamask, Mist installed or an Ethereum node running? If not, you might want to look into that"
+          return
+        }
+        if (accs.length == 0) {
+          this.message = "Couldn't get any accounts! Make sure your Ethereum client is configured correctly."
+          return
+        }
+        this.account = accs[0];
+        HunterToken.deployed()
+          .then((instance) => instance.address)
+          .then((address) => {
+            this.contractAddress = address
+            this.getUserHunter();
+          })
+      })
+    },
+    methods: {
+      getUserHunter(tokenId) {
+        HunterToken.deployed().then((instance) => instance.getOwnHunter(tokenId, { from: this.account })).then((r) => {
+          let hunter = {
+            "name": null,
+            "level": null,
+            "attack": null
+          } 
+          console.log(r)
+          hunter["name"] = r[0].toString();
+          hunter.level = r[1].toString();
+          hunter.attack = r[3].toString();
+        })
+      }
     }
   }
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+<style>
+
+</style>
