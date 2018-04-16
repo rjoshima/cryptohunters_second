@@ -7,6 +7,8 @@
     <ul> 
     </ul>
     <div id="txStatus"></div>
+    <div id="Hunter"></div>
+    <div>{{ hunter.name }}</div>
   </div>
 </template>
 
@@ -50,40 +52,44 @@
           return
         }
         this.account = accs[0];
-        HunterToken.deployed()
-          .then((instance) => instance.address)
-          .then((address) => {
-            this.contractAddress = address
-            this.getUserHunter();
-          })
-      })
+       })
     },
     methods: {
       createHunter(name) {
-        return CryptoZombies.methods.createRandomZombie(name)
-        .send({ from: userAccount })
+        return HunterToken.methods.createRandomHunter(name)
+        .send({ from: this.account })
         .on("receipt", function(receipt) {
           $("#txStatus").text("Successfully created " + name + "!");
           // Transaction was accepted into the blockchain, let's redraw the UI
-          getZombiesByOwner(userAccount).then(displayZombies);
+          getHunterByOwner(this.account).then(displayHunter);
         })
         .on("error", function(error) {
           // Do something to alert the user their transaction has failed
           $("#txStatus").text(error);
         });
+      },
+      displayHunter(id) {
+        getHunterDetails(id).then(function(hunter) {
+          $("#Hunter").empty();
+            $("#Hunter").append(`<div class="hunter">
+              <ul>
+                <li>Name: ${hunter.name}</li>
+              </ul>
+            </div>`);
+        })     
+      },
 
-      getUserHunter(tokenId) {
-        HunterToken.deployed().then((instance) => instance.getOwnHunter(tokenId, { from: this.account })).then((r) => {
-          let hunter = {
-            "name": null,
-            "level": null,
-            "attack": null
-          } 
-          console.log(r)
-          hunter["name"] = r[0].toString();
-          hunter.level = r[1].toString();
-          hunter.attack = r[3].toString();
-        })
+      getHunterDetails(id) {
+        return HunterToken.methods.hunter(id).call()
+      },
+
+        
+      hunterToOwner(id) {
+        return HunterToken.methods.hunterToOwner(id).call()
+      },
+
+      getHunterByOwner(owner) {
+        return HunterToken.methods.getHunterByOwner(owner).call()
       }
     }
   }
