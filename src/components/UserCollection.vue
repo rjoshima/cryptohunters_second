@@ -1,24 +1,26 @@
 <template>
   <div class="UserStatus">
-    <ul>
-      <li>Name: {{ hunter.name }}</li>
-      <li>DNA: {{ hunter.level }}</li>
-      <li>Level: {{ dtweet.title }}</li>
+    <div>ハンターを作る</div>
+    <div>名前は？</div>
+    <textarea>{{ hunter.name }}</textarea>
+    <button @click="dcreateHunter()">make hunter button</button>
+    <ul> 
     </ul>
+    <div id="txStatus"></div>
   </div>
 </template>
 
 <script>
   import Web3 from 'web3'
   import contract from 'truffle-contract'
-  import artifacts from '../contracts/CreateHunter.json'
+  import artifacts from '../../build/contracts/CreateHunter.json'
 
   const HunterToken = contract(artifacts)
   export default {
     name: 'UserCollection',
     data () {
       return {
-        msg: 'UserCollection'
+        hunter: {name: "f"},
       }
     },
     created() {
@@ -57,6 +59,19 @@
       })
     },
     methods: {
+      createHunter(name) {
+        return CryptoZombies.methods.createRandomZombie(name)
+        .send({ from: userAccount })
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Successfully created " + name + "!");
+          // Transaction was accepted into the blockchain, let's redraw the UI
+          getZombiesByOwner(userAccount).then(displayZombies);
+        })
+        .on("error", function(error) {
+          // Do something to alert the user their transaction has failed
+          $("#txStatus").text(error);
+        });
+
       getUserHunter(tokenId) {
         HunterToken.deployed().then((instance) => instance.getOwnHunter(tokenId, { from: this.account })).then((r) => {
           let hunter = {

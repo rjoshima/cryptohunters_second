@@ -7,22 +7,22 @@ import Web3 from 'web3'
 
 Vue.config.productionTip = false
 
-window.addEventListener('load', function () {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    alert( "円は¥n" + web3.currentProvider );
-    // Use Mist/MetaMask's provider
-    web3js = new Web3(web3.currentProvider);
-  } else {
-    console.log('No web3? You should consider trying MetaMask!')
-    alert( "円周率は¥n" + 3.14159 );
-    // web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545");
-    // Handle the case where the user doesn't have Metamask installed
-    // Probably show them a message prompting them to install Metamask
-  }
-  // Now you can start your app & access web3 freely:
-  // startApp()
-}
+// window.addEventListener('load', function () {
+//   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+//   if (typeof web3 !== 'undefined') {
+//     alert( "円は¥n" + web3.currentProvider );
+//     // Use Mist/MetaMask's provider
+//     web3js = new Web3(web3.currentProvider);
+//   } else {
+//     console.log('No web3? You should consider trying MetaMask!')
+//     alert( "円周率は¥n" + 3.14159 );
+//     // web3js = new Web3(new Web3.providers.HttpProvider("http://localhost:8545");
+//     // Handle the case where the user doesn't have Metamask installed
+//     // Probably show them a message prompting them to install Metamask
+//   }
+//   // Now you can start your app & access web3 freely:
+//   // startApp()
+// }
 
 // function startApp () {
 //   const cryptoZombiesAddress = "YOUR_CONTRACT_ADDRESS";
@@ -35,8 +35,8 @@ window.addEventListener('load', function () {
 
 //     }
 //   }, 100);
-  // ここから始めよ
-)
+// ここから始めよ
+// )
 // window.addEventListener('load', function () {
 //   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
 //   if (typeof web3 !== 'undefined') {
