@@ -3,7 +3,7 @@
     <div>ハンターを作る</div>
     <div>名前は？</div>
     <textarea>{{ hunter.name }}</textarea>
-    <button @click="dcreateHunter()">make hunter button</button>
+    <button @click="createHunter()">make hunter button</button>
     <ul> 
     </ul>
     <div id="txStatus"></div>
