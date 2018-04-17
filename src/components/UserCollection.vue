@@ -1,5 +1,6 @@
 <template>
   <div class="UserStatus">
+    <h2>adress: {{ adress }}</h2>
     <div>ハンターを作る</div>
     <div>名前は？</div>
     <el-main>
@@ -27,6 +28,7 @@
     data () {
       return {
         hunter: {name: ""},
+        adress: "waiting"
       }
     },
     created() {
@@ -56,6 +58,9 @@
           return
         }
         this.account = accs[0];
+        console.warn("aaaddee ")
+        console.warn(this.account)
+        this.adress = String(this.account)
        })
     },
     methods: {
