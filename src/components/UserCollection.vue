@@ -4,7 +4,7 @@
     <div>名前は？</div>
     <el-main>
       <el-input v-model="hunter.name" placeholder="ハンター名を入力" clearable>
-        <el-button slot="append" size="mini" @click="createHunter(this.hunter.name)">追加</el-button>
+        <el-button slot="append" @click="createHunter(hunter.name)">作成</el-button>
       </el-input>
     </el-main>
     <ul> 
@@ -26,7 +26,7 @@
     name: 'UserCollection',
     data () {
       return {
-        hunter: {name: "f"},
+        hunter: {name: ""},
       }
     },
     created() {
@@ -62,17 +62,16 @@
       createHunter(name) {
         console.log("うううううううううううう")
         console.log("rr")
-        this.name = "abc"
-        console.log(this.name)
-        return HunterToken.deployed().then((instance) => instance.createRandomHunter(this.name, { from: this.account }).then((r) => {
+        console.log(name)
+        return HunterToken.deployed().then((instance) => instance.createRandomHunter(name, { from: this.account })).then((r) => {
           console.log("rr")
           console.log("成功")
-          $("#txStatus").text("Successfully created " + this.name + "!");
+          $("#txStatus").text("Successfully created " + name + "!");
           // Transaction was accepted into the blockchain, let's redraw the UI
           getHunterByOwner(this.account).then(displayHunter);
         }).catch(function(err) {
         console.log(err.message);
-      }));;
+      });
       },
       displayHunter(id) {
         getHunterDetails(id).then(function(hunter) {
@@ -101,6 +100,9 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+  .el-main {
+    width: 350px;
+    margin: 0px auto;
+  }
 </style>
