@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <ul>
-        <li><router-link to="/"><a>home</a></router-link></li>
-        <li><router-link to="/Market"><a>Market</a></router-link></li>
-        <li><router-link to="/UserCollection"><a>UserCollection</a></router-link></li>
-    </ul>
+    <el-header>クリプトハンターズ</el-header>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="User" name="first"></el-tab-pane>
+      <el-tab-pane label="バトルフィールド" name="second"></el-tab-pane>
+      <el-tab-pane label="item marketprace" name="third"></el-tab-pane>
+    </el-tabs>
+    <img src="./assets/hunter_image.jpg">
     <router-view>
     </router-view>
+    <el-footer>cpryright joh 2018</el-footer>
   </div>
 </template>
 
@@ -27,3 +29,28 @@ export default {
   margin-top: 60px;
 }
 </style>
+
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab);
+        console.log(event)
+        if (tab.name === "first") {
+          this.$router.push('/UserCollection')
+        }
+        if (tab.name === "second") {
+          this.$router.push('/Market')
+        }
+        if (tab.name === "third") {
+          this.$router.push('/item')
+        }
+      }
+    }
+  };
+</script>

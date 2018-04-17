@@ -1,18 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>クリプトハンターズ 狩りしようぜ
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+      <h2>狩りに必要なアイテムを買おう！</h2>
+      <h2>このアイテムはユーザーと売買できるぞ！</h2>
+      <h2>剣や盾や回復薬などのアイテムが選べます。</h2>
   </div>
 </template>
 

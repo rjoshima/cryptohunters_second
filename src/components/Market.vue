@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>222Essential Links</h2>
+    <h2>バトルしたいモンスターを選べます。</h2>
     <ul>
       <li>
       </li>
@@ -14,7 +14,7 @@ export default {
   name: 'Market',
   data () {
     return {
-      msg: 'monster Market'
+      msg: 'バトルフィールド'
     }
   }
 }
