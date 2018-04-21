@@ -35,16 +35,5 @@ contract FighterAttack is CreateFighter {
     }
   }
 
-  function getFightersByOwner(address _owner) external view returns(uint[]) {
-    uint[] memory result = new uint[](ownerFighterCount[_owner]);
-    uint counter = 0;
-    for (uint i = 0; i < fighters.length; i++) {
-      if (fighterToOwner[i] == _owner) {
-        result[counter] = i;
-        counter++;
-      }
-    }
-    return result;
-  }
 
 }

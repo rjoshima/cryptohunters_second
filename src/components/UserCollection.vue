@@ -72,9 +72,8 @@
         return HunterToken.deployed().then((instance) => instance.createRandomFighter(name, { from: this.account })).then((r) => {
           console.log("rr")
           console.log("成功")
-          $("#txStatus").text("Successfully created " + name + "!");
           // Transaction was accepted into the blockchain, let's redraw the UI
-          getHunterByOwner(this.account).then(displayHunter);
+          this.getFightersByOwner(this.account)
         }).catch(function(err) {
         console.log(err.message);
       });
@@ -89,6 +88,11 @@
             </div>`);
         })     
       },
+      getFightersByOwner(owner) {
+        return HunterToken.deployed().then((instance) => instance.getFightersByOwner(owner)).then((r) => {
+          console.log(r)
+      })},
+     
 
       getHunterDetails(id) {
         return HunterToken.methods.hunter(id).call()
@@ -99,9 +103,6 @@
         return HunterToken.methods.hunterToOwner(id).call()
       },
 
-      getHunterByOwner(owner) {
-        return HunterToken.methods.getHunterByOwner(owner).call()
-      }
     }
   }
 </script>
