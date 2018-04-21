@@ -1,7 +1,8 @@
 pragma solidity ^0.4.19;
 
+import "./CreateFighters.sol";
 
-contract FighterAttack {
+contract FighterAttack is CreateFighter {
 
   uint randNonce = 0;
   uint attackVictoryProbability = 100;
@@ -35,7 +36,7 @@ contract FighterAttack {
   }
 
   function getFightersByOwner(address _owner) external view returns(uint[]) {
-    uint[] memory result = new uint[](ownerfighterCount[_owner]);
+    uint[] memory result = new uint[](ownerFighterCount[_owner]);
     uint counter = 0;
     for (uint i = 0; i < fighters.length; i++) {
       if (fighterToOwner[i] == _owner) {

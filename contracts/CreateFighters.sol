@@ -9,7 +9,7 @@ contract CreateFighter is Ownable {
   event NewFighter(uint fighterId, string name, uint dna);
 
   /* DATA TYPE */
-  struct fighter {
+  struct Fighter {
     string name;
     uint dna;
     uint32 level;
@@ -22,13 +22,12 @@ contract CreateFighter is Ownable {
 
   uint dnaDigits = 16;
   uint dnaModulus = 10 ** dnaDigits;
-  uint cooldownTime = 1 days;
 
   /* STORAGE */
-  Highter[] fighters;
+  Fighter[] fighters;
 
   function _createFighter(string _name, uint _dna) internal {
-    uint id = fighters.push(Fighter(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+    uint id = fighters.push(Fighter(_name, _dna, 1, 0, 0)) - 1;
     fighterToOwner[id] = msg.sender;
     ownerFighterCount[msg.sender]++;
     NewFighter(id, _name, _dna);
@@ -40,7 +39,6 @@ contract CreateFighter is Ownable {
   }
 
   function createRandomFighter(string _name) public {
-    require(ownerFighterCount[msg.sender] == 0);
     uint randDna = _generateRandomDna(_name);
     randDna = randDna - randDna % 100;
     _createFighter(_name, randDna);
