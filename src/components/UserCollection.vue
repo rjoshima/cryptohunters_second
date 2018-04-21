@@ -19,7 +19,7 @@
 <script>
   import Web3 from 'web3'
   import contract from 'truffle-contract'
-  import artifacts from '../../build/contracts/CreateHunter.json'
+  import artifacts from '../../build/contracts/CreateFighter.json'
 
   const HunterToken = contract(artifacts)
   // const name = "dd"
@@ -68,7 +68,8 @@
         console.log("うううううううううううう")
         console.log("rr")
         console.log(name)
-        return HunterToken.deployed().then((instance) => instance.createRandomHunter(name, { from: this.account })).then((r) => {
+        console.log(this.account)
+        return HunterToken.deployed().then((instance) => instance.createRandomFighter(name, { from: this.account })).then((r) => {
           console.log("rr")
           console.log("成功")
           $("#txStatus").text("Successfully created " + name + "!");

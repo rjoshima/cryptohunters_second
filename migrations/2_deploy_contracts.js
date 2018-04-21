@@ -1,5 +1,5 @@
-var CreateHunter = artifacts.require("./CreateHunter.sol");
+var CreateFighter = artifacts.require("./CreateFighter.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(CreateHunter);
+  deployer.deploy(CreateFighter);
 };
