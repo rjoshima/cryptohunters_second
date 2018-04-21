@@ -1,19 +1,19 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-      <h2>狩りに必要なアイテムを買おう！</h2>
-      <h2>このアイテムはユーザーと売買できるぞ！</h2>
-      <h2>剣や盾や回復薬などのアイテムが選べます。</h2>
-      <img src="../assets/kaihuku.png">
-      <img src="../assets/tate.jpg">
-      <img src="../assets/ken.jpg">
+    <h2>狩りに必要なアイテムを買おう！</h2>
+    <h2>このアイテムはユーザーと売買できるぞ！</h2>
+    <h2>剣や盾や回復薬などのアイテムが選べます。</h2>
+    <img src="../assets/kaihuku.png">
+    <img src="../assets/tate.jpg">
+    <img src="../assets/ken.jpg">
 
     <el-row>
       <el-col :span="8" v-for="(o, index) in 2" :key="o" :offset="index > 0 ? 2 : 0">
         <el-card :body-style="{ padding: '0px' }">
           <img src="../assets/kaihuku.png" class="image">
           <div style="padding: 14px;">
-            <span>回復薬を</span>
+            <span>回復薬</span>
             <div class="bottom clearfix">
               <time class="time">{{ currentDate }}</time>
               <el-button type="text" class="button">Operating button</el-button>

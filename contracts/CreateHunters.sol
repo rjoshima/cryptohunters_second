@@ -4,35 +4,34 @@ import "./ownable.sol";
 
 // import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 
-contract CreateHunter is Ownable {
+contract CreateFighter is Ownable {
 
-  event NewHunter(uint hunterId, string name, uint dna);
+  event NewFighter(uint fighterId, string name, uint dna);
 
   /* DATA TYPE */
-  struct Hunter {
+  struct fighter {
     string name;
     uint dna;
     uint32 level;
-    uint32 readyTime;
     uint16 winCount;
     uint16 lossCount;
   }
 
-  mapping (uint => address) public hunterToOwner;
-  mapping (address => uint) ownerHunterCount;
+  mapping (uint => address) public fighterToOwner;
+  mapping (address => uint) ownerFighterCount;
 
   uint dnaDigits = 16;
   uint dnaModulus = 10 ** dnaDigits;
   uint cooldownTime = 1 days;
 
   /* STORAGE */
-  Hunter[] hunters;
+  Highter[] fighters;
 
-  function _createHunter(string _name, uint _dna) internal {
-    uint id = hunters.push(Hunter(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
-    hunterToOwner[id] = msg.sender;
-    ownerHunterCount[msg.sender]++;
-    NewHunter(id, _name, _dna);
+  function _createFighter(string _name, uint _dna) internal {
+    uint id = fighters.push(Fighter(_name, _dna, 1, uint32(now + cooldownTime), 0, 0)) - 1;
+    fighterToOwner[id] = msg.sender;
+    ownerFighterCount[msg.sender]++;
+    NewFighter(id, _name, _dna);
   }
 
   function _generateRandomDna(string _str) private view returns (uint) {
@@ -40,11 +39,11 @@ contract CreateHunter is Ownable {
     return rand % dnaModulus;
   }
 
-  function createRandomHunter(string _name) public {
-    require(ownerHunterCount[msg.sender] == 0);
+  function createRandomFighter(string _name) public {
+    require(ownerFighterCount[msg.sender] == 0);
     uint randDna = _generateRandomDna(_name);
     randDna = randDna - randDna % 100;
-    _createHunter(_name, randDna);
+    _createFighter(_name, randDna);
   }
 
 }
