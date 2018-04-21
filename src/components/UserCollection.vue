@@ -73,7 +73,9 @@
           console.log("rr")
           console.log("成功")
           // Transaction was accepted into the blockchain, let's redraw the UI
-          this.getFightersByOwner(this.account)
+          // this.getFightersByOwner(this.account)
+          var id = 1
+          this.getFighter(id)
         }).catch(function(err) {
         console.log(err.message);
       });
@@ -91,8 +93,22 @@
       getFightersByOwner(owner) {
         return HunterToken.deployed().then((instance) => instance.getFightersByOwner(owner)).then((r) => {
           console.log(r)
+          console.log(r[0].id)
+          HunterToken.deployed().then((instance) => instance.fighters(r[0].id)).then((e) => {
+          
+          console.log("get iddddd")
+
+          });
       })},
-     
+       getFighter(id) {
+         console.log("get iddddd1111")
+        HunterToken.deployed().then((instance) => instance.getFighter(id)).then((e) => {
+          
+          console.log("get iddddd")
+          console.log(e)
+
+          });
+      },
 
       getHunterDetails(id) {
         return HunterToken.methods.hunter(id).call()

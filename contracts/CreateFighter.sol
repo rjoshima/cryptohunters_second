@@ -56,4 +56,9 @@ contract CreateFighter is Ownable {
     return result;
   }
 
+  function getFighter(uint256 _tokenId) external view returns (string name) {
+    Fighter memory fighter = fighters[_tokenId];
+
+    name = fighter.name;
+  }
 }
