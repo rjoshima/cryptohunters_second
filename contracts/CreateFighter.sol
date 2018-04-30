@@ -44,7 +44,12 @@ contract CreateFighter is Ownable {
     _createFighter(_name, randDna);
   }
 
-  function getFightersByOwner(address _owner) external view returns(uint[]) {
+  // function getAllFightersOfOwner(address _owner) external view returns(uint b) {
+  //   uint aa = ownerFighterCount[msg.sender];
+  //   b = 4;
+  // }
+
+  function getAllFightersOfOwner(address _owner) external view returns(uint[]) {
     uint[] memory result = new uint[](ownerFighterCount[_owner]);
     uint counter = 0;
     for (uint i = 0; i < fighters.length; i++) {
@@ -60,5 +65,11 @@ contract CreateFighter is Ownable {
     Fighter memory fighter = fighters[_tokenId];
 
     name = fighter.name;
+
   }
+
+  // function getAllDTweets() external view returns (uint256[]) {
+  //   return allTokens;
+  // }
+
 }
