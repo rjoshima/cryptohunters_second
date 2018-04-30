@@ -15,8 +15,7 @@
           <div style="padding: 14px;">
             <span>回復薬</span>
             <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
-              <el-button type="text" class="button">Operating button</el-button>
+              <el-button type="text" class="button">Buy</el-button>
             </div>
           </div>
         </el-card>

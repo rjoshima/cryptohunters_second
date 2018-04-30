@@ -15,13 +15,13 @@
     <div>{{ hunter.name }}</div>
     <div v-for="fighter in fighters">
         <el-row>
-      <el-col>
+      <el-col :span="8">
         <el-card :body-style="{ padding: '0px' }">
           <img src="../assets/fighter_defo.png" class="image">
           <div style="padding: 14px;">
+          <span>名前</span>
             <span>{{fighter.name}}</span>
             <div class="bottom clearfix">
-              <time class="time">{{ currentDate }}</time>
               <el-button type="text" class="button">Operating button</el-button>
             </div>
           </div>
@@ -104,7 +104,6 @@
         for (var i = 0; i < r.length; i++) {
           console.log("ううう")
           this.getFighter(r[i]);
-          console.log(this.getFighter(r[i]))
         }
       })
     },

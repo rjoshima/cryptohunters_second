@@ -6,7 +6,7 @@
       <el-tab-pane label="バトルフィールド" name="second"></el-tab-pane>
       <el-tab-pane label="item marketprace" name="third"></el-tab-pane>
     </el-tabs>
-    <img src="./assets/hunter_image.jpg">
+  
     <router-view>
     </router-view>
     <el-footer>cpryright joh 2018</el-footer>
