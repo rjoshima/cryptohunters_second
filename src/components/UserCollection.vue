@@ -14,8 +14,22 @@
     <div id="Hunter"></div>
     <div>{{ hunter.name }}</div>
     <div v-for="fighter in fighters">
-        <p>name: {{ fighter.name }}</p>
-      </div>
+        <el-row>
+      <el-col>
+        <el-card :body-style="{ padding: '0px' }">
+          <img src="../assets/fighter_defo.png" class="image">
+          <div style="padding: 14px;">
+            <span>{{fighter.name}}</span>
+            <div class="bottom clearfix">
+              <time class="time">{{ currentDate }}</time>
+              <el-button type="text" class="button">Operating button</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
+        
+    </div>
   </div>
 </template>
 

@@ -7,6 +7,13 @@ import Web3 from 'web3'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vuetify from 'vuetify'
+
+Vue.use(Vuetify)
+Vue.use(BootstrapVue)
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
