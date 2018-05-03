@@ -21,6 +21,8 @@
           <div style="padding: 14px;">
           <span>名前</span>
             <span>{{fighter.name}}</span>
+            <span>レベル</span>
+            <span>{{fighter.level}}</span>
             <div class="bottom clearfix">
               <el-button type="text" class="button">Operating button</el-button>
             </div>
@@ -89,7 +91,6 @@
         console.log(this.account)
         return HunterToken.deployed().then((instance) => instance.createRandomFighter(name, { from: this.account })).then((r) => {
           
-
           console.log("成功")
           this.updateFighters();
         }).catch(function(err) {
@@ -109,17 +110,18 @@
     },
     getFighter(tokenId) {
       HunterToken.deployed().then((instance) => instance.getFighter(tokenId, { from: this.account })).then((r) => {
-
         var fighter = {
           "name": null,
         }
-
-        fighter["name"] = r;
+        fighter["name"] = r[0];
 
         console.log(fighter)
+        console.log("うううう")
+        console.log(r)
+        console.log(r[1])
+        fighter["level"] = r[1];
         this.fighters.push(fighter)
         // console.log(r)
-
       })
     },
      

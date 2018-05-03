@@ -27,7 +27,7 @@ contract CreateFighter is Ownable {
   Fighter[] fighters;
 
   function _createFighter(string _name, uint _dna) internal {
-    uint id = fighters.push(Fighter(_name, _dna, 1, 0, 0)) - 1;
+    uint id = fighters.push(Fighter(_name, _dna, 6, 0, 0)) - 1;
     fighterToOwner[id] = msg.sender;
     ownerFighterCount[msg.sender]++;
     NewFighter(id, _name, _dna);
@@ -61,10 +61,11 @@ contract CreateFighter is Ownable {
     return result;
   }
 
-  function getFighter(uint256 _tokenId) external view returns (string name) {
+  function getFighter(uint256 _tokenId) external view returns (string name, uint32 level) {
     Fighter memory fighter = fighters[_tokenId];
 
     name = fighter.name;
+    level = fighter.level;
 
   }
 
