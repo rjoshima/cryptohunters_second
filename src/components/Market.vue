@@ -1,7 +1,8 @@
 <template>
   <div class="UserStatus">
     <h2>adress: {{ adress }}</h2>
-    <div>バトルフィールド</div>
+    <h2>parcent: {{ Probability.parcent }}</h2>
+    
     <ul> 
     </ul>
     <div id="txStatus"></div>
@@ -15,8 +16,10 @@
           <div style="padding: 14px;">
           <span>名前</span>
             <span>{{fighter.name}}</span>
+            <span>レベル</span>
+            <span>{{fighter.level}}</span>
             <div class="bottom clearfix">
-              <el-button type="text" class="button" @click="fight(fighterId, targetId)">戦う</el-button>
+              <el-button type="text" class="button" @click="fight(fighter.tokenID, fighter.tokenID)">戦う</el-button>
             </div>
           </div>
         </el-card>
@@ -33,8 +36,6 @@
   import artifacts from '../../build/contracts/CreateFighter.json'
   const HunterToken = contract(artifacts)
 
-  import artifacts2 from '../../build/contracts/FighterAttack.json'
-  const attackToken = contract(artifacts2)
   // const name = "dd"
   export default {
     name: 'UserCollection',
@@ -42,7 +43,8 @@
       return {
         fighters: [],
         hunter: {name: ""},
-        adress: "waiting"
+        adress: "waiting",
+        Probability: {parcent: 10}
       }
     },
     created() {
@@ -80,13 +82,19 @@
     },
     methods: {
       fight(fighterID, targetID) {
-        console.log("うううううううううううう")
-        console.log("rr")
+        console.log(fighterID)
+        console.log("ratackr")
         console.log(name)
-        console.log(this.account)
-        return attackToken.deployed().then((instance) => instance.fight(fighterID, targetID, { from: this.account })).then((r) => {
+      
+        HunterToken.deployed().then((instance) => instance.attack(0, 0, { from: this.account })).then((r) => {
           
-          console.log("成功")
+          console.log("攻撃成功")
+          var victory = {
+          "do": null,
+           }
+
+          console.log(r)
+          this.Probability.parcent = victory["do"];
           this.updateFighters();
         }).catch(function(err) {
         console.log(err.message);
@@ -108,8 +116,11 @@
         var fighter = {
           "name": null,
         }
-        fighter["name"] = r;
+        fighter["name"] = r[0];
         console.log(fighter)
+        fighter["level"] = r[1];
+        fighter["tokenID"] = parseInt(r[2]);
+
         this.fighters.push(fighter)
         // console.log(r)
       })

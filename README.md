@@ -42,5 +42,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 よく使うコマンド
 truffle develop
 migrate --reset --compile-all
+migrate --reset --all
 rm -rf build/contracts/
 now recommended to using firefox, because of that is more stable than chrome when using metamask, I feel.
+if you want to debug, use remix https://remix.ethereum.org/
+

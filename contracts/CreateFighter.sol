@@ -73,4 +73,40 @@ contract CreateFighter is Ownable {
   //   return allTokens;
   // }
 
+
+
+  uint randNonce = 0;
+  uint attackVictoryProbability;
+
+  function randMod(uint _modulus) internal returns(uint) {
+    randNonce++;
+    return uint(keccak256(now, msg.sender, randNonce)) % _modulus;
+  }
+
+  modifier onlyOwnerOf(uint _fighterId) {
+    require(msg.sender == fighterToOwner[_fighterId]);
+    _;
+  }
+
+  function attack(uint _fighterId, uint _targetId) external onlyOwnerOf(_fighterId) {
+    Fighter storage myFighter = fighters[_fighterId];
+    Fighter storage targetFighter = fighters[_targetId];
+    uint rand = randMod(100);
+
+    
+    if (myFighter.level <= targetFighter.level) {
+      attackVictoryProbability = 100 / ( 1 + targetFighter.level / myFighter.level);
+    } else {
+      attackVictoryProbability = 100 / ( 1 - targetFighter.level / myFighter.level);
+    }
+    if (rand <= attackVictoryProbability) {
+      myFighter.winCount++;
+      myFighter.level++;
+
+    } else {
+      myFighter.winCount++;
+      myFighter.lossCount++;
+    }
+  }
+
 }
