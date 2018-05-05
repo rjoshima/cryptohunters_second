@@ -104,7 +104,6 @@ contract CreateFighter is Ownable {
       myFighter.level++;
 
     } else {
-      myFighter.winCount++;
       myFighter.lossCount++;
     }
   }
